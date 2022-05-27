@@ -1,0 +1,103 @@
+.login{
+    background-color: #131313;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    grid-column: 1 / 2;
+    grid-row: 1;
+    height: 100vh;
+    
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.image {
+    width: 50%;
+    height: 50%;
+}
+
+.login-body{
+    background-color: #262626;
+    grid-column: 2 / 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-body form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.login_mess {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 50px;
+    padding-bottom: 50px;
+}
+
+.label{
+    color: rgb(255, 255, 255)!important;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    padding-top: 20px;
+}
+input{
+    outline: none;
+    border: 0px solid;
+    width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 5px 0px 0px 15px;
+}
+
+.login_button{
+    display: flex;
+    transition: 250ms;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    width: 200px;
+    height: 45px;
+    background-image: radial-gradient(100% 50% at 20% 10%,#ff7070 0%,#b12727 200%);
+    border-radius: 10px;
+    font-size: 18px;
+    margin-top: 140px;
+}
+
+.login_button:hover {
+    opacity: 0.8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.notregister{
+    color: #FF7070;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+.toregister{
+    color: #FF7070;
+    text-decoration: none;
+}
+.toregister:hover{
+    color: #c43e3e;
+    text-decoration: none;
+}

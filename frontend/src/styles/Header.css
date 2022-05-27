@@ -1,0 +1,26 @@
+.navbar{
+    background-color: #131313 !important;
+    padding: 1vh;
+}
+
+.logo_nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vh;
+}
+
+.deconnexion{
+    color: #ff0000;
+}
+
+.img_profil{
+    border-radius: 100%;
+    width: 5vh;
+}
+
+.img_profil:hover{
+    transition-duration: 0.2s;
+    filter: brightness(150%);
+}
