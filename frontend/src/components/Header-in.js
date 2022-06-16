@@ -88,10 +88,9 @@ const Header = () => {
                                 <NavLink to={'profile/' + myId}
                                     onClick={() => navigate(`/profile/${myId}`, { replace: true })}
                                     className='dropdown-item'>
-                                    <span>Profil</span>
+                                    <span>Mon historique</span>
                                 </NavLink>
-                                <NavLink to="settings" className={({ isActive }) => (isActive ?
-                                    (isAdmin == 1 ? ('nav-active-admin') : ('nav-active')) : (isAdmin == 1 ? ('inactive-admin') : ('inactive')))}>
+                                <NavLink to="settings" className='dropdown-item'>
                                     <span>Éditer mon profil</span>
                                 </NavLink>
                                 <NavLink to="logout" className='dropdown-item'>

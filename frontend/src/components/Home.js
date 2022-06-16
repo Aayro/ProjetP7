@@ -189,8 +189,8 @@ const Dashboard = () => {
                     <p>{post.postMsg}</p>
                     {post.comments.length == 0 ? (<NavLink to={'../post/' + post.id} className="button is-small is-info">Commenter</NavLink>)
                       : (post.comments.length == 1 ?
-                        (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>commentaire</NavLink>)
-                        : (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>commentaires</NavLink>)
+                        (<NavLink to={'../post/' + post.id} className="button is-small is-info"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>Commentaire</NavLink>)
+                        : (<NavLink to={'../post/' + post.id} className="button is-small is-info"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>Commentaires</NavLink>)
                       )}
                     {isAdmin == 1 ? (<button type='button' className="button is-pulled-right is-danger" onClick={() => { deletePost(post.id) }}>Supprimer</button>) : post.userId == user.userId ? (<button type='button' className="button is-pulled-right is-danger" onClick={() => { deletePost(post.id) }}>Supprimer</button>) : ('')}
                   </div>

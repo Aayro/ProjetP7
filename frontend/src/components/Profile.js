@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation, NavLink } from "react-router-dom";
+import '../styles/Profile.css';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
@@ -120,70 +121,72 @@ const Dashboard = () => {
 
     return (
         <>
-            <section className="mesInfos">
-                <div className={user.isAdmin == 1 ? ("card mb-5 has-background-danger-light") : ("card mb-5 has-background-info-light")}>
-                    <div className="card-content">
-                        <div className="media">
-                            <div className="media-left">
-                                <figure className="image is-48x48">
-                                    <img className="userImg is-rounded" src={'../images/profilepictures/' + user.userImg} alt='pp' />
-                                </figure>
+            <section className="All_profil">
+                <section className="mesInfos">
+                    <div className={user.isAdmin == 1 ? ("card mb-5 has-background-danger-light") : ("card mb-5 has-background-info-light")}>
+                        <div className="card-content">
+                            <div className="media">
+                                <div className="media-left">
+                                    <figure className="image is-48x48">
+                                        <img className="userImg is-rounded" src={'../images/profilepictures/' + user.userImg} alt='pp' />
+                                    </figure>
+                                </div>
+                                <div className="media-content">
+                                    <p className={user.isAdmin == 1 ? ("title is-size-6 has-text-danger-dark mb-2") : ("title is-size-6 has-text-info-dark mb-2")}>
+                                        {user.prenom} {user.nom}<span className="has-text-grey has-text-weight-light ml-1">{user.email}</span>
+                                    </p>
+                                    <p className="is-italic is-size-7 has-text-grey mb-2"> A rejoint l'équipe {LastSeen(user.createdAt)}</p>
+                                    <p className="is-italic is-size-7 has-text-grey mb-2">{posts.length === 0 ? ("N'a publié aucun message") : (
+                                        posts.length === 1 ? ('A publié ' + posts.length + ' message') : ('A publié ' + posts.length + ' messages')
+                                    )}
+                                    </p>
+                                    <p className="is-italic is-size-7 has-text-grey">{comments.length === 0 ? ("N'a publié aucun commentaire") : (
+                                        comments.length === 1 ? ('A publié ' + comments.length + ' commentaire') : ('A publié ' + comments.length + ' commentaires')
+                                    )}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="media-content">
-                                <p className={user.isAdmin == 1 ? ("title is-size-6 has-text-danger-dark mb-2") : ("title is-size-6 has-text-info-dark mb-2")}>
-                                    {user.prenom} {user.nom}<span className="has-text-grey has-text-weight-light ml-1">{user.email}</span>
-                                </p>
-                                <p className="is-italic is-size-7 has-text-grey mb-2"> A rejoint l'équipe {LastSeen(user.createdAt)}</p>
-                                <p className="is-italic is-size-7 has-text-grey mb-2">{posts.length === 0 ? ("N'a publié aucun message") : (
-                                    posts.length === 1 ? ('A publié ' + posts.length + ' message') : ('A publié ' + posts.length + ' messages')
-                                )}
-                                </p>
-                                <p className="is-italic is-size-7 has-text-grey">{comments.length === 0 ? ("N'a publié aucun commentaire") : (
-                                    comments.length === 1 ? ('A publié ' + comments.length + ' commentaire') : ('A publié ' + comments.length + ' commentaires')
-                                )}
-                                </p>
-                            </div>
+                            {isAdmin == 1 ? (
+                                <div className="content pb-5">
+                                    <button type='button' className="button is-pulled-right is-danger" onClick={() => { delUser(user.id) }}>Supprimer le compte</button>
+                                </div>
+                            ) : ('')}
                         </div>
-                        {isAdmin == 1 ? (
-                            <div className="content pb-5">
-                                <button type='button' className="button is-pulled-right is-danger is-outlined" onClick={() => { delUser(user.id) }}>Supprimer</button>
-                            </div>
-                        ) : ('')}
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section className="tousLesMessages">
-                {posts.slice(0).reverse().map((post, index) => {
-                    return (
-                        <div key={index} className="card mb-5">
-                            <div className="card-content">
-                                <div className="media">
-                                    <div className="media-left">
-                                        <figure className="image is-48x48">
-                                            <img className="userImg is-rounded" src={'../images/profilepictures/' + post.user.userImg} alt='pp' />
-                                        </figure>
+                <section className="tousLesMessages">
+                    {posts.slice(0).reverse().map((post, index) => {
+                        return (
+                            <div key={index} className="card mb-5">
+                                <div className="card-content">
+                                    <div className="media">
+                                        <div className="media-left">
+                                            <figure className="image is-48x48">
+                                                <img className="userImg is-rounded" src={'../images/profilepictures/' + post.user.userImg} alt='pp' />
+                                            </figure>
+                                        </div>
+                                        <div className="media-content">
+                                            <p className={post.user.isAdmin == 1 ? ("title is-size-6 has-text-danger-dark mb-5") : ("title is-size-6 has-text-info-dark mb-5")}>
+                                                {post.user.prenom} {post.user.nom} <span className="has-text-grey has-text-weight-light">{post.user.email}</span>
+                                            </p>
+                                            <p className="subtitle is-size-7 has-text-grey">{LastSeen(post.createdAt)}</p>
+                                        </div>
                                     </div>
-                                    <div className="media-content">
-                                        <p className={post.user.isAdmin == 1 ? ("title is-size-6 has-text-danger-dark mb-5") : ("title is-size-6 has-text-info-dark mb-5")}>
-                                            {post.user.prenom} {post.user.nom} <span className="has-text-grey has-text-weight-light">{post.user.email}</span>
-                                        </p>
-                                        <p className="subtitle is-size-7 has-text-grey">{LastSeen(post.createdAt)}</p>
+                                    <div className="content">
+                                        <p>{post.postMsg}</p>
+                                        {post.comments.length === 0 ? (<NavLink to={'../post/' + post.id} className="button is-small is-info">Commenter</NavLink>)
+                                            : (post.comments.length === 1 ?
+                                                (<NavLink to={'../post/' + post.id} className="button is-small is-info"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>Commentaire</NavLink>)
+                                                : (<NavLink to={'../post/' + post.id} className="button is-small is-info"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>Commentaires</NavLink>)
+                                            )}
+                                        {isAdmin == 1 ? (<button type='button' className="button is-pulled-right is-danger" onClick={() => { deletePost(post.id) }}>Supprimer</button>) : ('')}
                                     </div>
-                                </div>
-                                <div className="content">
-                                    <p>{post.postMsg}</p>
-                                    {post.comments.length === 0 ? (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light">Commenter</NavLink>)
-                                        : (post.comments.length === 1 ?
-                                            (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>commentaire</NavLink>)
-                                            : (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>commentaires</NavLink>)
-                                        )}
-                                    {isAdmin == 1 ? (<button type='button' className="button is-pulled-right is-danger is-outlined" onClick={() => { deletePost(post.id) }}>Supprimer</button>) : ('')}
                                 </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </section>
             </section>
         </>
     );

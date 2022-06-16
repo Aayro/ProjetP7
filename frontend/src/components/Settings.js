@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import '../styles/Settings.css';
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import reactImageSize from 'react-image-size';
@@ -136,58 +137,56 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="message is-dark">
-                <h2 className={isAdmin === 1 ? ("message-header has-background-danger") : ("message-header has-background-link")}>Mes informations</h2>
-                <div className="message-body">
-                    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} enableReinitialize={true}>
-                        <Form>
-                            {msg ? (<p className="notification is-danger is-size-6 p-2 mt-1">{msg}</p>) : ("")}
-                            <div className="field">
-                                <label htmlFor='nom' className="label">Nom:</label>
-                                <div className="controls">
-                                    <Field name="nom" type="text" placeholder="Nom" autoComplete="off" className="input"></Field>
-                                </div>
-                                <ErrorMessage name="nom" component="p" className="notification is-danger is-italic is-light p-2 mt-2" />
+            <section className="All_Settings">
+                <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} enableReinitialize={true}>
+                    <Form>
+                        <h2 className="information_text">Mes informations</h2>
+                        {msg ? (<p className="notification is-danger is-size-6 p-2 mt-1">{msg}</p>) : ("")}
+                        <div className="field">
+                            <label htmlFor='nom' className="label">Nom:</label>
+                            <div className="controls">
+                                <Field name="nom" type="text" placeholder="Nom" autoComplete="off" className="input"></Field>
                             </div>
-                            <div className="field">
-                                <label htmlFor='prenom' className="label">Prénom:</label>
-                                <div className="controls">
-                                    <Field name="prenom" type="text" placeholder="Prénom" autoComplete="off" className="input"></Field>
-                                </div>
-                                <ErrorMessage name="prenom" component="p" className="notification is-danger is-italic is-light p-2 mt-1" />
+                            <ErrorMessage name="nom" component="p" className="notification is-danger is-italic is-light p-2 mt-2" />
+                        </div>
+                        <div className="field">
+                            <label htmlFor='prenom' className="label">Prénom:</label>
+                            <div className="controls">
+                                <Field name="prenom" type="text" placeholder="Prénom" autoComplete="off" className="input"></Field>
                             </div>
-                            <div className="field">
-                                <label htmlFor='email' className="label">Email:</label>
-                                <div className="controls">
-                                    <Field name="email" type="text" placeholder="Email" autoComplete="off" className="input"></Field>
-                                </div>
-                                <ErrorMessage name="email" component="p" className="notification is-danger is-light p-2 mt-1" />
+                            <ErrorMessage name="prenom" component="p" className="notification is-danger is-italic is-light p-2 mt-1" />
+                        </div>
+                        <div className="field">
+                            <label htmlFor='email' className="label">Email:</label>
+                            <div className="controls">
+                                <Field name="email" type="text" placeholder="Email" autoComplete="off" className="input"></Field>
                             </div>
-                            <div className="field">
-                                <label htmlFor='userImg' className="label">Image: <small>(250x250 max)</small></label>
-                                <div className="controls">
-                                    <div className="file">
-                                        <label className="file-label">
-                                            <input name='userImg' type="file" className="file-input" onChange={onImageChange} />
-                                            <span className="file-cta">
-                                                <span className="file-icon">
-                                                    <i className="fas fa-upload"></i>
-                                                </span>
-                                                <span className="file-label">
-                                                    Envoyez votre image…
-                                                </span>
+                            <ErrorMessage name="email" component="p" className="notification is-danger is-light p-2 mt-1" />
+                        </div>
+                        <div className="field">
+                            <label htmlFor='userImg' className="label">Image: <small>(250x250 max)</small></label>
+                            <div className="controls">
+                                <div className="file">
+                                    <label className="file-label">
+                                        <input name='userImg' type="file" className="file-input" onChange={onImageChange} />
+                                        <span className="file-cta">
+                                            <span className="file-icon">
+                                                <i className="fas fa-upload"></i>
                                             </span>
-                                        </label>
-                                    </div>
-                                    {userImgPreview ? (<img id="imgPreview" src={userImgPreview} alt="preview" width='128' />) : ("")}
+                                            <span className="file-label">
+                                                Modifier votre image de profil
+                                            </span>
+                                        </span>
+                                    </label>
                                 </div>
+                                {userImgPreview ? (<img id="imgPreview" src={userImgPreview} alt="preview" width='128' />) : ("")}
                             </div>
-                            <button type='submit' className="button is-link is-outlined mt-2">Valider mes changements</button>
-                            <button type='button' className="button is-danger is-outlined mt-2 btnDelete" onClick={() => { delUser(myId) }}>Supprimer mon compte</button>
-                        </Form>
-                    </Formik>
-                </div>
-            </div>
+                        </div>
+                        <button type='submit' className="button is-success ">Valider mes changements</button>
+                        <button type='button' className="button is-danger btnDelete" onClick={() => { delUser(myId) }}>Supprimer mon compte</button>
+                    </Form>
+                </Formik>
+            </section>
         </>
     );
 }
