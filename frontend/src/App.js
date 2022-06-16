@@ -3,6 +3,9 @@ import Footer from "./components/Footer";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
+import Profile from "./components/Profile";
+import Settings from "./components/Settings";
+import Post from "./components/Post";
 
 import { BrowserRouter as Router, Routes, Route, Outlet, Navigate, useParams } from "react-router-dom";
 
@@ -42,9 +45,9 @@ const App = () => {
           </Route>
           <Route path="/*" element={<Connected />}>
             <Route path="home" element={<Home />} />
-            {/* <Route path="profile/:id" element={<Profile />} />
+            <Route path="profile/:id" element={<Profile />} />
             <Route path="post/:id" element={<Post />} />
-            <Route path="settings" element={<Settings />} /> */}
+            <Route path="settings" element={<Settings />} />
           </Route>
         </Routes>
       </Router>

@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/Home.css';
 import { useState, useEffect } from "react";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -95,6 +96,14 @@ const Dashboard = () => {
     }
   };
 
+  function parseJwt(token) {
+    if (!token) { return; }
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+  }
+  const user = parseJwt(token);
+
   const getPosts = async () => {
     const response = await axiosJWT.get('http://localhost:5000/posts', {
       headers: {
@@ -122,71 +131,74 @@ const Dashboard = () => {
   }
 
 
+
   return (
     <>
-      <section className="mesInfos">
-        <div className="card">
-          <div className="card-content">
-            <div className="media">
-              <div className="media-left">
-                <figure className="image is-48x48">
-                  <img className="userImg is-rounded" src={'images/profilepictures/' + userImg} alt='pp' />
-                </figure>
-              </div>
-              <div className="media-content">
-                <div className="publish-post">
-                  <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} enableReinitialize={true}>
-                    <Form>
-                      {msg ? (<p className="notification is-danger is-size-6 p-2 mt-1">{msg}</p>) : ("")}
-                      <div className="field">
-                        <div className="controls grow-wrap">
-                          <Field name="postMsg" as="textarea" placeholder={'Alors ' + prenom + ', quoi de neuf ?'} autoComplete="off" className="textarea is-dark-light" rows="2"></Field>
+      <section className="All_home">
+        <section className="mesInfos">
+          <div className="card">
+            <div className="card-content">
+              <div className="media">
+                <div className="media-left">
+                  <figure className="image is-48x48">
+                    <img className="userImg is-rounded" src={'images/profilepictures/' + userImg} alt='pp' />
+                  </figure>
+                </div>
+                <div className="media-content">
+                  <div className="publish-post">
+                    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} enableReinitialize={true}>
+                      <Form>
+                        {msg ? (<p className="notification is-danger is-size-6 p-2 mt-1">{msg}</p>) : ("")}
+                        <div className="field">
+                          <div className="controls grow-wrap">
+                            <Field name="postMsg" as="textarea" placeholder={'Alors ' + prenom + ', quoi de neuf ?'} autoComplete="off" className="textarea is-dark-light" rows="2"></Field>
+                          </div>
+                          <ErrorMessage name="postMsg" component="p" className="notification is-danger is-italic is-light p-2 mt-2" />
                         </div>
-                        <ErrorMessage name="postMsg" component="p" className="notification is-danger is-italic is-light p-2 mt-2" />
-                      </div>
-                      <button type='submit' className="button is-pulled-right is-link is-outlined mt-4">Envoyer</button>
-                    </Form>
-                  </Formik>
+                        <button type='submit' className="button is-pulled-right is-success mt-4">Envoyer</button>
+                      </Form>
+                    </Formik>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="tousLesMessages mt-5">
-        {posts.map((post, index) => {
-          return (
-            <div key={index} className="card mb-5">
-              <div className="card-content">
-                <div className="media">
-                  <div className="media-left">
-                    <figure className="image is-48x48">
-                      <img className="userImg is-rounded" src={'../images/profilepictures/' + post.user.userImg} alt='pp' />
-                    </figure>
+        <section className="tousLesMessages mt-5">
+          {posts.map((post, index) => {
+            return (
+              <div key={index} className="card mb-5">
+                <div className="card-content">
+                  <div className="media">
+                    <div className="media-left">
+                      <figure className="image is-48x48">
+                        <img className="userImg is-rounded" src={'../images/profilepictures/' + post.user.userImg} alt='pp' />
+                      </figure>
+                    </div>
+                    <div className="media-content">
+                      <p className="">
+                        <NavLink to={'../profile/' + post.userId}
+                          className={post.user.isAdmin == 1 ? ("title is-size-6 has-text-danger-dark mb-1") : ("title is-size-6 has-text-info-dark mb-5")}>
+                          {post.user.prenom} {post.user.nom}</NavLink><span className="has-text-grey has-text-weight-light ml-1">{post.user.email}</span>
+                      </p>
+                      <p className="is-size-7 has-text-grey">{LastSeen(post.createdAt)}</p>
+                    </div>
                   </div>
-                  <div className="media-content">
-                    <p className="">
-                      <NavLink to={'../profile/' + post.userId}
-                        className={post.user.isAdmin == 1 ? ("title is-size-6 has-text-danger-dark mb-1") : ("title is-size-6 has-text-info-dark mb-5")}>
-                        {post.user.prenom} {post.user.nom}</NavLink><span className="has-text-grey has-text-weight-light ml-1">{post.user.email}</span>
-                    </p>
-                    <p className="is-size-7 has-text-grey">{LastSeen(post.createdAt)}</p>
+                  <div className="content">
+                    <p>{post.postMsg}</p>
+                    {post.comments.length == 0 ? (<NavLink to={'../post/' + post.id} className="button is-small is-info">Commenter</NavLink>)
+                      : (post.comments.length == 1 ?
+                        (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>commentaire</NavLink>)
+                        : (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>commentaires</NavLink>)
+                      )}
+                    {isAdmin == 1 ? (<button type='button' className="button is-pulled-right is-danger" onClick={() => { deletePost(post.id) }}>Supprimer</button>) : post.userId == user.userId ? (<button type='button' className="button is-pulled-right is-danger" onClick={() => { deletePost(post.id) }}>Supprimer</button>) : ('')}
                   </div>
-                </div>
-                <div className="content">
-                  <p>{post.postMsg}</p>
-                  {post.comments.length == 0 ? (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light">Commenter</NavLink>)
-                    : (post.comments.length == 1 ?
-                      (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>commentaire</NavLink>)
-                      : (<NavLink to={'../post/' + post.id} className="button is-small is-link is-light"><span className="has-text-weight-bold mr-1">{post.comments.length}</span>commentaires</NavLink>)
-                    )}
-                  {isAdmin == 1 ? (<button type='button' className="button is-pulled-right is-danger is-outlined" onClick={() => { deletePost(post.id) }}>Supprimer</button>) : ('')}
                 </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </section>
       </section>
     </>
   );

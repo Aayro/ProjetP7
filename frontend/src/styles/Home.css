@@ -1,0 +1,167 @@
+/* DEBUT CONNECTED LAYOUT */
+.All_home {
+	display: grid;
+	align-items: start;
+	justify-content: center;
+	grid-template-rows: auto auto 1fr;
+	grid-template-columns: repeat(12, 1fr);
+    padding: 2em 0;
+    background: #262626;
+}
+    .mesInfos {
+        grid-row: 1/2;
+        grid-column: 5/9;
+    }
+    .mesInfos .card, .tousLesMessages .card {
+        position: relative;
+        border: 1px solid #353535;
+        background: #353535;
+        color: white;
+        border-radius: .85rem;
+        box-shadow: none;
+        
+    }
+    .mesInfos div.grow-wrap {
+        display: grid;
+    }
+    .mesInfos div.grow-wrap::after {
+        content: attr(data-replicated-value) " ";
+        white-space: pre-wrap;
+        visibility: hidden;
+    }
+    .mesInfos div.grow-wrap > textarea {
+        resize: none;
+        overflow: hidden;
+        background: #353535!important;
+        color: white;
+    }
+    .mesInfos div.grow-wrap > textarea,
+    .mesInfos div.grow-wrap::after {
+        border: none;
+        padding: 0;
+        font: inherit;
+        grid-area: 1 / 1 / 2 / 2;
+    }
+    .publish-post {
+        padding: 0 0.5rem;
+    }
+    .mesInfos .textarea:focus {
+        border: none;
+        box-shadow: none;
+    }
+    .mesInfos .textarea::placeholder {
+        color: hsl(0, 0%, 48%);
+        font-size: 1em;
+    }
+    .mesInfos div.field {
+        margin: 0;
+        padding: 0 0 0.75rem 0 ;
+        border-bottom: 1px #dbdbdb solid;
+    }
+    .mesInfos button, .tousLesMessages button {
+        padding: 1em;
+        font-size: 0.8rem;
+        border-radius: 2em;
+    }
+
+    section.mesInfos div.postPage {
+        border-radius: .85rem .85rem 0 0;
+        border-bottom: 0;
+    }
+    section.mesInfos div.postPageForm {
+        border-radius: 0 0 .85rem .85rem;
+    }
+    section.comlist div.cardList {
+        border-radius: 0;
+        border-bottom: 0;
+    }
+    section.comlist div.cardList:first-child {
+        border-radius: .85rem .85rem 0 0;
+    }
+    section.comlist div.cardList:last-child {
+        border-radius: 0 0 .85rem .85rem;
+        border-bottom: 1px solid #e8e8e8;
+    }
+
+
+.tousLesMessages {
+    grid-row: 3/4;
+    grid-column: 5/9;
+}
+div.myMessage {
+    background-color: #3e8ed0;
+    color: #fff;
+}
+figure.image img.userImg {
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+}
+
+#imgPreview {
+        display: block;
+        margin: 1em auto;
+        width: 96px;
+        height: 96px;
+        border-radius: 100%;
+        /* border: 5px #485fc7 solid; */
+        outline: 3px #485fc7 solid;
+        outline-offset: 3px;
+        /* box-shadow:
+        0 0 0 3px rgb(255, 255, 255),
+        0 0 0 6px hsl(229,53%,53%);*/
+        }
+        div.message button {
+            padding: 0.8em;
+        }
+        button.btnDelete {
+            float: right;
+        }
+
+        @media (min-width: 1440px) {
+            main.layout {
+                grid-template-columns: repeat(12, 1fr);
+            }
+            .message, .mesInfos, .tousLesMessages {
+                grid-column: 5/9;
+            }
+        }
+        @media (max-width: 1440px) {
+            main.layout {
+                grid-template-columns: repeat(11, 1fr);
+            }
+            .message, .mesInfos, .tousLesMessages {
+                grid-column: 4/9;
+            }
+        }
+        @media (max-width: 1024px) {
+            main.layout {
+                grid-template-columns: repeat(7, 1fr);
+            }
+            .message, .mesInfos, .tousLesMessages {
+                grid-column: 2/7;
+            }
+        }
+        @media (max-width: 767px) {
+            main.layout {
+                grid-template-columns: repeat(10, 1fr);
+            }
+            .message, .mesInfos, .tousLesMessages {
+                grid-column: 2/10;
+            }
+        
+        }
+        @media (max-width: 480px) {
+            header div.tabs {
+                font-size: 0.8rem;
+            }
+            main.layout {
+                grid-template-columns: repeat(10, 1fr);
+            }
+            .message, .mesInfos, .tousLesMessages {
+                grid-column: 2/10;
+                padding: 0;
+            }
+            button.btnDelete {
+                float: none;
+            }
+        }
