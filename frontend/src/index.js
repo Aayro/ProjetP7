@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import "bulma/css/bulma.css";
 import axios from "axios";
+import './styles/index.css';
 
 axios.defaults.withCredentials = true;
 

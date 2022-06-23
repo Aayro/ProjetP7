@@ -75,7 +75,7 @@ const Header = () => {
             <header>
                 <div className="navbar">
                     <div className="logo_nav">
-                        <a href="/home"><img className="image" src="/assets/icon-left-font-monochrome-white.svg" alt="Logo de groupomania" /></a>
+                        <a href="/home"><img className="image_nav" src="/assets/icon-left-font-monochrome-white.svg" alt="Logo de groupomania" /></a>
                     </div>
                     <div className={isActive ? 'dropdown is-active' : "dropdown"}>
                         <div className="dropdown-trigger">

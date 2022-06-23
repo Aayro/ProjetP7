@@ -1,14 +1,14 @@
 .navbar{
     background-color: #131313 !important;
-    padding: 1vh;
+    padding: 2vh;
 }
 
-.logo_nav {
+.logo_nav a {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50vh;
+    padding-top: 1vh;
 }
 
 .deconnexion{
@@ -43,10 +43,10 @@
 .dropdown-menu {
     display: none;
     left: auto!important;
-    min-width: 12rem;
+    min-width: 12rem !important;
     padding-top: 4px;
     position: absolute;
-    top: 100%;
+    top: 6vh !important;
     z-index: 20;
     right: 0;
 }
@@ -59,4 +59,8 @@
 .btnprofile:focus, .button.is-focused {
     border-color: transparent!important;
     color: transparent!important;
+}
+
+.image_nav {
+    width: 40%;
 }

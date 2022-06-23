@@ -140,7 +140,6 @@ const Dashboard = () => {
             <section className="All_Settings">
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} enableReinitialize={true}>
                     <Form>
-                        <h2 className="information_text">Mes informations</h2>
                         {msg ? (<p className="notification is-danger is-size-6 p-2 mt-1">{msg}</p>) : ("")}
                         <div className="field">
                             <label htmlFor='nom' className="label">Nom:</label>
