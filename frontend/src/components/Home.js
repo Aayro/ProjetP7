@@ -1,10 +1,11 @@
 import React from "react";
 import '../styles/Home.css';
 import { useState, useEffect } from "react";
-import { useNavigate, NavLink, useLocation } from "react-router-dom";
+import { useNavigate, useParams, NavLink, useLocation } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import reactImageSize from 'react-image-size';
 import * as Yup from "yup";
 
 import TimeAgo from 'timeago-react';
@@ -18,6 +19,7 @@ const Dashboard = () => {
   const [nom, setNom] = useState('');
   const [prenom, setPrenom] = useState('');
   const [userImg, setUserImg] = useState('');
+  const [postImg, setPostImg] = useState('');
   const [email, setEmail] = useState('');
   const [isAdmin, setAdmin] = useState('');
   const [token, setToken] = useState('');
@@ -27,6 +29,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
+  const { id } = useParams();
 
   useEffect(() => {
     refreshToken();
@@ -63,7 +66,7 @@ const Dashboard = () => {
       const decoded = jwt_decode(response.data.accessToken);
       setNom(decoded.nom);
       setPrenom(decoded.prenom);
-      setUserImg(decoded.userImg);
+      setPostImg(decoded.userImg);
       setEmail(decoded.email);
       setAdmin(decoded.isAdmin);
       setExpire(decoded.exp);
@@ -74,17 +77,23 @@ const Dashboard = () => {
   });
 
   const initialValues = {
-    postMsg: ""
+    postMsg: "",
+
   };
 
   const validationSchema = Yup.object().shape({
-    postMsg: Yup.string().min(1, "Le message doit contenir au moins 1 caractère").required("")
+    postMsg: Yup.string().min(1, "Le message doit contenir au moins 1 caractère").required(""),
+
   });
 
   const onSubmit = async (data, { resetForm }) => {
-    console.log(data);
     try {
-      await axios.post('http://localhost:5000/posts', data);
+      const formData = new FormData;
+      formData.append('postMsg', data.postMsg);
+      if (postImg != userImg) {
+        formData.append('postImg', postImg)
+      }
+      await axios.post('http://localhost:5000/posts', formData);
       setPosts(posts);
       resetForm({ values: '' });
       navigate("/home", { replace: true });
@@ -131,6 +140,10 @@ const Dashboard = () => {
   }
 
 
+  const onImageChange = event => {
+    setPostImg(event.target.files[0])
+  }
+
 
   return (
     <>
@@ -155,6 +168,7 @@ const Dashboard = () => {
                           </div>
                           <ErrorMessage name="postMsg" component="p" className="notification is-danger is-italic is-light p-2 mt-2" />
                         </div>
+                        <input name='postImg' type="file" onChange={onImageChange} />
                         <button type='submit' className="button is-pulled-right is-success mt-4">Envoyer</button>
                       </Form>
                     </Formik>
@@ -167,6 +181,7 @@ const Dashboard = () => {
 
         <section className="tousLesMessages mt-5">
           {posts.map((post, index) => {
+            console.log(post)
             return (
               <div key={index} className="card mb-5">
                 <div className="card-content">
@@ -186,6 +201,8 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="content">
+
+                    {post.postImg ? (<img src={'../images/postspictures/' + post.postImg} alt='pp' />) : ('')}
                     <p>{post.postMsg}</p>
                     {post.comments.length == 0 ? (<NavLink to={'../post/' + post.id} className="button is-small is-info">Commenter</NavLink>)
                       : (post.comments.length == 1 ?
