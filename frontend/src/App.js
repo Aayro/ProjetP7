@@ -10,21 +10,23 @@ import Post from "./components/Post";
 import { BrowserRouter as Router, Routes, Route, Outlet, Navigate, useParams } from "react-router-dom";
 
 function Logout() {
+
   return (
     <>
-      <main className="layout">
+      <main id="main" className="layout">
         <Outlet />
       </main>
       <Footer />
     </>
   )
+
 }
 
 function Connected() {
   return (
     <>
       <HeaderIn />
-      <main className="layout">
+      <main id="main" className="layout">
         <Outlet />
       </main>
       <Footer />

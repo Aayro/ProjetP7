@@ -44,7 +44,6 @@ export const getAllPosts = async (req, res) => {
 
 export const publishPost = async (req, res) => {
     const refreshToken = req.cookies.refreshToken;
-    console.log(req.file)
     try {
         const user = await Users.findAll({
             where: { refresh_token: refreshToken }

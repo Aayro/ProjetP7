@@ -174,6 +174,7 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                     <div className="content">
+                                        {post.postImg ? (<img src={'../images/postspictures/' + post.postImg} alt='post image' />) : ('')}
                                         <p>{post.postMsg}</p>
                                         {post.comments.length === 0 ? (<NavLink to={'../post/' + post.id} className="button is-small is-info">Commenter</NavLink>)
                                             : (post.comments.length === 1 ?

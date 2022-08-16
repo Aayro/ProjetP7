@@ -1,4 +1,10 @@
-/* DEBUT CONNECTED LAYOUT */
+body {
+    height: 100vh;
+  }
+
+main {
+    height: 100vh;
+}
 .All_home {
 	display: grid;
 	align-items: start;
@@ -9,6 +15,15 @@
     background: #262626;
     height: 100%;
 }
+
+.content img {
+    max-width: 70%;
+    margin: auto;
+    display: flex;
+  
+
+}
+
     .mesInfos {
         grid-row: 1/2;
         grid-column: 5/9;

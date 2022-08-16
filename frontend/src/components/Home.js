@@ -11,6 +11,7 @@ import * as Yup from "yup";
 import TimeAgo from 'timeago-react';
 import * as timeago from 'timeago.js';
 import fr from 'timeago.js/lib/lang/fr';
+import '../getheight';
 timeago.register('fr', fr);
 
 
@@ -146,6 +147,7 @@ const Dashboard = () => {
 
 
   return (
+
     <>
       <section className="All_home">
         <section className="mesInfos">
@@ -181,7 +183,6 @@ const Dashboard = () => {
 
         <section className="tousLesMessages mt-5">
           {posts.map((post, index) => {
-            console.log(post)
             return (
               <div key={index} className="card mb-5">
                 <div className="card-content">
@@ -201,8 +202,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                   <div className="content">
-
-                    {post.postImg ? (<img src={'../images/postspictures/' + post.postImg} alt='pp' />) : ('')}
+                    {post.postImg ? (<img src={'../images/postspictures/' + post.postImg} alt='post image' />) : ('')}
                     <p>{post.postMsg}</p>
                     {post.comments.length == 0 ? (<NavLink to={'../post/' + post.id} className="button is-small is-info">Commenter</NavLink>)
                       : (post.comments.length == 1 ?
@@ -221,4 +221,7 @@ const Dashboard = () => {
   );
 }
 
+
+
 export default Dashboard
+

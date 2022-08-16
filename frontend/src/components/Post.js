@@ -86,7 +86,6 @@ const Dashboard = () => {
     });
 
     const onSubmit = async (data, { resetForm }) => {
-        console.log(data);
         try {
             await axios.post(`http://localhost:5000/comments/id/${id}`, data);
             setComments(comments);
@@ -186,6 +185,7 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                     <div className="content pb-5">
+                                        {post.postImg ? (<img src={'../images/postspictures/' + post.postImg} alt='post image' />) : ('')}
                                         <p>{post.postMsg}</p>
                                         {isAdmin == 1 ? (<button type='button' className="button is-pulled-right is-danger" onClick={() => { deletePost(post.id) }}>Supprimer</button>) : post.userId == user.userId ? (<button type='button' className="button is-pulled-right is-danger is-outlined" onClick={() => { deletePost(post.id) }}>Supprimer</button>) : ('')}
                                     </div>

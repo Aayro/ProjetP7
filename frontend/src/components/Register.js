@@ -26,7 +26,6 @@ const Register = () => {
     });
 
     const onSubmit = async (data) => {
-        console.log(data);
         try {
             await axios.post('http://localhost:5000/users', data);
             navigate("/login", { replace: true });
