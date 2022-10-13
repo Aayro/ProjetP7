@@ -79,3 +79,27 @@ input{
     color: #c43e3e;
     text-decoration: none;
 }
+
+@media (max-width: 480px) {
+    .login{
+        background-color: #131313;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: minmax(100px, auto);
+        grid-row: 1;
+        height: 100vh;
+    }
+    .login-body{
+        background-color: #262626;
+        grid-column: 1 / 2;
+        grid-row: 2;
+    }
+    .login_mess {
+        color: white;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 40px;
+        padding-bottom: 50px;
+    }
+}

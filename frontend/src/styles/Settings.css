@@ -7,10 +7,24 @@
 	grid-row: 1;
 	padding: 2em 0;
 	background: #262626;
-	height: 100%;
+	height: 100vh;
 }
 
 Form {
 	grid-column: 2 / 3;
 	grid-row: 1;
+}
+
+@media (max-width: 480px) {
+	.All_Settings {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-gap: 10px;
+		grid-auto-rows: minmax(100px, auto);
+		grid-column: 1 / 3;
+		grid-row: 1;
+		padding: 2em 0;
+		background: #262626;
+		height: 100vh;
+	}
 }

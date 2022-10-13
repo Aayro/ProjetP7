@@ -113,71 +113,15 @@ figure.image img.userImg {
     border-radius: 100%;
 }
 
-#imgPreview {
-        display: block;
-        margin: 1em auto;
-        width: 96px;
-        height: 96px;
-        border-radius: 100%;
-        /* border: 5px #485fc7 solid; */
-        outline: 3px #485fc7 solid;
-        outline-offset: 3px;
-        /* box-shadow:
-        0 0 0 3px rgb(255, 255, 255),
-        0 0 0 6px hsl(229,53%,53%);*/
-        }
-        div.message button {
-            padding: 0.8em;
-        }
-        button.btnDelete {
-            float: right;
-        }
-
-        @media (min-width: 1440px) {
-            main.layout {
-                grid-template-columns: repeat(12, 1fr);
-            }
-            .message, .mesInfos, .tousLesMessages {
-                grid-column: 5/9;
-            }
-        }
-        @media (max-width: 1440px) {
-            main.layout {
-                grid-template-columns: repeat(11, 1fr);
-            }
-            .message, .mesInfos, .tousLesMessages {
-                grid-column: 4/9;
-            }
-        }
-        @media (max-width: 1024px) {
-            main.layout {
-                grid-template-columns: repeat(7, 1fr);
-            }
-            .message, .mesInfos, .tousLesMessages {
-                grid-column: 2/7;
-            }
-        }
-        @media (max-width: 767px) {
-            main.layout {
-                grid-template-columns: repeat(10, 1fr);
-            }
-            .message, .mesInfos, .tousLesMessages {
-                grid-column: 2/10;
-            }
-        
-        }
-        @media (max-width: 480px) {
-            header div.tabs {
-                font-size: 0.8rem;
-            }
-            main.layout {
-                grid-template-columns: repeat(10, 1fr);
-            }
-            .message, .mesInfos, .tousLesMessages {
-                grid-column: 2/10;
-                padding: 0;
-            }
-            button.btnDelete {
-                float: none;
-            }
-        }
+@media (max-width: 480px) {
+    .All_home {
+        display: grid;
+        align-items: start;
+        justify-content: center;
+        grid-template-rows: auto auto 1fr;
+        grid-template-columns: repeat(10, 1fr);
+        padding: 2em 0;
+        background: #262626;
+        height: 100%;
+    }
+}
