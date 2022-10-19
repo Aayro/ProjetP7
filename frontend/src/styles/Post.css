@@ -165,4 +165,14 @@ button.btnDelete {
     button.btnDelete {
         float: none;
     }
+    .All_Post {
+        display: grid;
+        align-items: start;
+        justify-content: center;
+        grid-template-rows: auto auto 1fr;
+        grid-template-columns: repeat(10, 1fr);
+        padding: 2em 0;
+        background: #262626;
+        height: 100%;
+    }
 }
